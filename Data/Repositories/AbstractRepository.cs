@@ -20,11 +20,11 @@ namespace IoT.Web.Data.Repositories
 
         public void SetCreated(AbstractAuditEntity entity)
         {
-            entity.Created = DateTime.UtcNow;
+            entity.CreatedOn = DateTime.UtcNow;
         }
         public void SetUpdated(AbstractAuditEntity entity)
         {
-            entity.Updated = DateTime.UtcNow;
+            entity.UpdatedOn = DateTime.UtcNow;
         }
 
         public async Task SaveChangesAsync()

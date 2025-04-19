@@ -15,7 +15,8 @@ namespace IoT.Web.Data
         {
             base.OnModelCreating(builder);
         }
-
+        public DbSet<ActivityEntity> Activities { get; set; }
         public DbSet<DeviceEntity> Devices { get; set; }
+        public DbSet<SessionEntity> Sessions { get; set; }
     }
 }

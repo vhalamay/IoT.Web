@@ -7,5 +7,6 @@ namespace IoT.Web.Data.Entities.Abstract
     {
         [Key]
         public long Id { get; set; }
+        public bool Deleted { get; set; }
     }
 }

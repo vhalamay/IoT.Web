@@ -32,7 +32,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Views\Interfaces\" />
-    <Folder Include="Models\Enums\" />
     <Folder Include="Models\Interfaces\" />
     <Folder Include="wwwroot\js\react\shared\" />
   </ItemGroup>
