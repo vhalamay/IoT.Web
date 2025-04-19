@@ -40,9 +40,11 @@ namespace IoT.Web
             });
 
             services.AddTransient<IDeviceRepository, DeviceRepository>();
+            services.AddTransient<ISessionRepository, SessionRepository>();
 
             services.AddTransient<IDeviceService, DeviceService>();
             services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<ISessionService, SessionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

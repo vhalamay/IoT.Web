@@ -27,6 +27,15 @@ export function Link_Devices() {
 export function Link_Device_Edit() {
     return `/${devices}/${edit}`;
 }
+export function Link_Device_Sessions(deviceId) {
+    deviceId ??= ':id';
+    return `/${devices}/${deviceId}/${sessions}`;
+}
+
+// Sessions
+export function Link_Sessions() {
+    return `/${sessions}`;
+}
 
 // API
 // Devices
@@ -39,4 +48,12 @@ export function Api_Devices_Start(id) {
 }
 export function Api_Devices_Finish(id) {
     return `${api}/${devices}/${id}/${finish}`;
+}
+export function Api_Devices_Sessions(id) {
+    return `${api}/${devices}/${id}/${sessions}`;
+}
+
+// Sessions
+export function Api_Sessions() {
+    return `${api}/${sessions}`;
 }

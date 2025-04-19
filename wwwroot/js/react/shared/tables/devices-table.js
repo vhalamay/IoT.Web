@@ -12,6 +12,7 @@ import Lnk from '../buttons/lnk';
 
 import {
     Link_Device_Edit,
+    Link_Device_Sessions,
     Api_Devices,
     Api_Devices_Start,
     Api_Devices_Finish
@@ -109,6 +110,9 @@ export default function DevicesTable(props) {
         <div className='l-row' key={index}>
             <div className='l-clm info'>
                 <Lnk href={Link_Device_Edit(device.id)} text={device.name}/>
+            </div>
+            <div className='l-clm btns'>
+                <Lnk text='Sessions' isBtn={true} href={Link_Device_Sessions(device.id)} count={228}/>
             </div>
             <div className='l-clm actn'>
                 <Lnk text='Start' icon={faPlay} isBtn={true} hide={device.active === true} onClick={()=>(startDevice(device.id))} className='l-green'/>

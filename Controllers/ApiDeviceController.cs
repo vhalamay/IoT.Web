@@ -1,5 +1,8 @@
 ﻿using IoT.Web.Models.Requests.Devices;
+using IoT.Web.Models.Requests.Sessions;
 using IoT.Web.Models.Responses.Devices;
+using IoT.Web.Models.Responses.Sessions;
+using IoT.Web.Services;
 using IoT.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,10 +13,14 @@ namespace IoT.Web.Controllers
     public class ApiDeviceController : AbstractController<ApiDeviceController>
     {
         IDeviceService _deviceService;
-        public ApiDeviceController(ILogger<ApiDeviceController> logger, IDeviceService deviceService) 
+        ISessionService _sessionService;
+        public ApiDeviceController(ILogger<ApiDeviceController> logger,
+            IDeviceService deviceService,
+            ISessionService sessionService)
             : base(logger)
         {
             _deviceService = deviceService;
+            _sessionService = sessionService;
         }
 
         [HttpGet("api/devices")]
@@ -27,5 +34,9 @@ namespace IoT.Web.Controllers
         [HttpPost("api/devices/{id}/finish")]
         public async Task FinishDevice(long id) =>
             await _deviceService.FinishDevice(id, CurrentUserId);
+
+        [HttpGet("api/devices/{id}/sessions")]
+        public async Task<SessionsResponse> GetSessions([FromRoute] long id, [FromQuery] SessionsRequest request) =>
+            await _sessionService.GetSessions(request, id);
     }
 }

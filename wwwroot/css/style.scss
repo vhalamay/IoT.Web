@@ -1155,43 +1155,39 @@ $actn-btn-width-large: 90px;
 
 .l-tbl-sessions {
     .l-row {
-        $prg-width: 475px;
-        $actn-width: calc(5px + #{$actn-btn-width});
-        $actn-width-large: calc(5px + #{$actn-btn-width-large});
+        $btns-width: 115px;
+        $date-width: 185px;
+        $duration-width: 250px;
 
         .info {
-            width: calc(100% - #{$prg-width} - #{$actn-width-large});
-
-            @media screen and (max-width: $medium) {
-                order: 1;
-                width: calc(100% - #{$actn-width-large});
-                padding-bottom: 10px;
-            }
-
-            @media screen and (max-width: $extra-small) {
-                width: calc(100% - #{$actn-width});
-            }
+            width: calc(100% - #{$btns-width} - #{$date-width} - #{$duration-width});
         }
 
-        .prg {
-            width: $prg-width;
+        .date {
+            width: $date-width;
+            align-content: center;
+        }
+
+        .duration {
+            width: $duration-width;
+            align-content: center;
+        }
+
+        .btns {
+            order: 2;
+            display: flex;
+            width: $btns-width;
+            
+            .l-btn{
+                @extend %l-tbl-same;
+            }
 
             @media screen and (max-width: $medium) {
                 order: 3;
-                width: 100%;
-            }
-        }
-
-        .actn {
-            width: $actn-width-large;
-
-            @media screen and (max-width: $medium) {
-                order: 2;
-                padding-bottom: 10px;
             }
 
             @media screen and (max-width: $extra-small) {
-                width: $actn-width;
+                width: 100%;
             }
         }
     }
@@ -1468,18 +1464,60 @@ $actn-btn-width-large: 90px;
     }
 }
 
+
 .l-tbl-devices {
-    $actn-width-large: calc(1 * (5px + #{$actn-btn-width-large}));
+    
+    .l-row {
+        $btns-width: 115px;
+        $actn-width: calc(1 * (5px + #{$actn-btn-width}));
+        $actn-width-large: calc(1 * (5px + #{$actn-btn-width-large}));
 
-    .info {
-        width: calc(100% - #{$actn-width-large});
-    }
+        .info {
+            order: 1;
+            width: calc(100% - #{$btns-width} - #{$actn-width-large});
 
-    .actn {
-        width: $actn-width-large;
-        
-        @media screen and (max-width: $extra-small) {
-            width: 100%;
+            @media screen and (max-width: $medium) {
+                padding-bottom: 10px;
+                width: calc(100% - #{$actn-width-large});
+            }
+
+            @media screen and (max-width: $extra-small) {
+                width: calc(100% - #{$actn-width});
+            }
+        }
+
+        .btns {
+            order: 2;
+            display: flex;
+            width: $btns-width;
+            
+            .l-btn{
+                @extend %l-tbl-same;
+            }
+
+            @media screen and (max-width: $medium) {
+                order: 3;
+            }
+
+            @media screen and (max-width: $extra-small) {
+                width: 100%;
+            }
+        }
+
+        .actn {
+            order: 3;
+            width: $actn-width-large;
+
+
+            @media screen and (max-width: $medium) {
+                order: 2;
+                padding-bottom: 10px;
+                justify-content: flex-end;
+            }
+
+            @media screen and (max-width: $extra-small) {
+                width: $actn-width;
+            }
         }
     }
 }
