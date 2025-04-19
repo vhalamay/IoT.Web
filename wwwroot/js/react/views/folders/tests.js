@@ -1,0 +1,14 @@
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+import FolderNavsBreadcrumb from './navs-breadcrumb';
+import TestsTable from '../../shared/tables/tests-table';
+
+export default function FolderTermsContent() {
+    let { id } = useParams();
+
+    return  <div>
+                <FolderNavsBreadcrumb folderId={id} current='Tests'/>
+                <TestsTable folderId={id}/>
+            </div>;
+}

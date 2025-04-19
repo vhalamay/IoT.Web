@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IoT.Web</title>
+</head>
+<body>
+    <header>
+        <nav class="l-main-nav">
+            <div class="lft">
+                <a href="/">IoT.Web</a>
+                <button onclick="collapse()">More</button>
+            </div>
+            <div class="rght" id="collapseId">
+                <div class="lnks">
+                    <a href="/sessions">Sessions</a>
+                    <a href="/folders">Folders</a>
+                    <a href="/sets">Sets</a>
+                </div>
+                <div class="lgn">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="l-main">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <script>
+        let className = 'show';
+        function collapse() {
+            var element = document.getElementById("collapseId");
+            if (element.classList.contains(className)) {
+                element.classList.remove(className);
+            } else {
+                element.classList.add(className);
+            }
+        }
+    </script>
+    <script src="~/js/bundle.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
