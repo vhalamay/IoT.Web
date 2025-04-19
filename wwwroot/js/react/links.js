@@ -8,8 +8,8 @@ const widgets = 'widgets';
 
 const create = 'create';
 const edit = 'edit';
-const clone = 'clone';
-const info = 'info';
+const start = 'start';
+const finish = 'finish';
 
 const identity = 'identity';
 const account = 'account';
@@ -32,4 +32,11 @@ export function Link_Device_Edit() {
 // Devices
 export function Api_Devices() {
     return `${api}/${devices}`;
+}
+
+export function Api_Devices_Start(id) {
+    return `${api}/${devices}/${id}/${start}`;
+}
+export function Api_Devices_Finish(id) {
+    return `${api}/${devices}/${id}/${finish}`;
 }

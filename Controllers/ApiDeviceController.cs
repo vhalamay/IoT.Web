@@ -19,5 +19,13 @@ namespace IoT.Web.Controllers
         [HttpGet("api/devices")]
         public async Task<DevicesResponse> GetDevices(DevicesRequest request) =>
             await _deviceService.GetDevices(request);
+
+        [HttpPost("api/devices/{id}/start")]
+        public async Task StartDevice(long id) =>
+            await _deviceService.StartDevice(id, CurrentUserId);
+
+        [HttpPost("api/devices/{id}/finish")]
+        public async Task FinishDevice(long id) =>
+            await _deviceService.FinishDevice(id, CurrentUserId);
     }
 }

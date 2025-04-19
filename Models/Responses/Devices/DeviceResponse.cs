@@ -6,11 +6,6 @@ namespace IoT.Web.Models.Responses.Devices
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public string Created { get; set; }
-
-        public DeviceResponse()
-        {
-
-        }
+        public bool Active { get; set; }
     }
 }

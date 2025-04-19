@@ -7,5 +7,7 @@ namespace IoT.Web.Services.Interfaces
     public interface IDeviceService
     {
         Task<DevicesResponse> GetDevices(DevicesRequest request);
+        Task StartDevice(long deviceId, string userGuid);
+        Task FinishDevice(long deviceId, string userGuid);
     }
 }

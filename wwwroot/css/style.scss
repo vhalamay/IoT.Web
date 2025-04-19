@@ -831,6 +831,9 @@ $actn-btn-width-large: 90px;
                     color: $color-red;
                 }
 
+                &.l-green {
+                    color: $color-green;
+                }
                 margin-left: 5px;
 
                 @media screen and (max-width: $extra-small) {
@@ -1450,6 +1453,22 @@ $actn-btn-width-large: 90px;
 }
 
 .l-tbl-users {
+    $actn-width-large: calc(1 * (5px + #{$actn-btn-width-large}));
+
+    .info {
+        width: calc(100% - #{$actn-width-large});
+    }
+
+    .actn {
+        width: $actn-width-large;
+        
+        @media screen and (max-width: $extra-small) {
+            width: 100%;
+        }
+    }
+}
+
+.l-tbl-devices {
     $actn-width-large: calc(1 * (5px + #{$actn-btn-width-large}));
 
     .info {

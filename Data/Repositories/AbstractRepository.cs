@@ -18,13 +18,15 @@ namespace IoT.Web.Data.Repositories
             Context = context;
         }
 
-        public void SetCreated(AbstractAuditEntity entity)
+        public void SetCreated(AbstractAuditEntity entity, string userGuid)
         {
             entity.CreatedOn = DateTime.UtcNow;
+            entity.CreatedBy = userGuid;
         }
-        public void SetUpdated(AbstractAuditEntity entity)
+        public void SetUpdated(AbstractAuditEntity entity, string userGuid)
         {
             entity.UpdatedOn = DateTime.UtcNow;
+            entity.Updatedby = userGuid;
         }
 
         public async Task SaveChangesAsync()

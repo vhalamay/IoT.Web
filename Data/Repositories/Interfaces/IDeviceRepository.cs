@@ -7,5 +7,7 @@ namespace IoT.Web.Data.Repositories.Interfaces
     public interface IDeviceRepository
     {
         Task<DevicesResponse> GetDevices(DevicesRequest request);
+        Task StartDevice(long deviceId, string userGuid);
+        Task FinishDevice(long deviceId, string userGuid);
     }
 }

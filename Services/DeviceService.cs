@@ -17,5 +17,13 @@ namespace IoT.Web.Services
         {
             return await _deviceRepository.GetDevices(request);
         }
+        public async Task StartDevice(long deviceId, string userGuid)
+        {
+            await _deviceRepository.StartDevice(deviceId, userGuid);
+        }
+        public async Task FinishDevice(long deviceId, string userGuid)
+        {
+            await _deviceRepository.FinishDevice(deviceId, userGuid);
+        }
     }
 }

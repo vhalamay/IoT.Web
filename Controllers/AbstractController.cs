@@ -17,7 +17,7 @@ namespace IoT.Web.Controllers
             Logger = logger;
         }
 
-        public Guid CurrentUserId
+        public string CurrentUserId
         {
             get
             {
@@ -26,7 +26,7 @@ namespace IoT.Web.Controllers
                 if (string.IsNullOrEmpty(userId))
                     throw new UnauthorizedException();
 
-                return Guid.Parse(userId);
+                return userId;
             }
         }
     }

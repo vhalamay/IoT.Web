@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { faClone, faTrashCan, faBook, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 
 import { GetFromStorage, SetToStorage } from '../../extensions/local-storage';
 import Paging from '../paging';
@@ -13,6 +13,8 @@ import Lnk from '../buttons/lnk';
 import {
     Link_Device_Edit,
     Api_Devices,
+    Api_Devices_Start,
+    Api_Devices_Finish
  } from '../../links';
 
 export default function DevicesTable(props) {
@@ -64,6 +66,32 @@ export default function DevicesTable(props) {
         SetToStorage(filterNameId, value);
     }
 
+    const startDevice = (id) => {
+        setLoaded(false);
+        
+        axios
+        .post(Api_Devices_Start(id))
+        .then(function (response) {
+            getItems();
+        })
+        .catch(function (error) {
+            setLoaded(true);
+        });
+    }
+
+    const finishDevice = (id) => {
+        setLoaded(false);
+        
+        axios
+        .post(Api_Devices_Finish(id))
+        .then(function (response) {
+            getItems();
+        })
+        .catch(function (error) {
+            setLoaded(true);
+        });
+    }
+
     // dataTable
     useEffect(() => {
         getItems();
@@ -81,6 +109,10 @@ export default function DevicesTable(props) {
         <div className='l-row' key={index}>
             <div className='l-clm info'>
                 <Lnk href={Link_Device_Edit(device.id)} text={device.name}/>
+            </div>
+            <div className='l-clm actn'>
+                <Lnk text='Start' icon={faPlay} isBtn={true} hide={device.active === true} onClick={()=>(startDevice(device.id))} className='l-green'/>
+                <Lnk text='Finish' icon={faPause} isBtn={true} hide={device.active === false} onClick={()=>(finishDevice(device.id))} className='l-red' />
             </div>
         </div>) 
         : <NoItems/>;
