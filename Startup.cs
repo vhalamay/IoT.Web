@@ -11,6 +11,7 @@ using IoT.Web.Services;
 using IoT.Web.Extensions;
 using IoT.Web.Middlewares;
 using IoT.Web.Services.Interfaces;
+using IoT.Web.Data.Repositories.Interfaces;
 
 namespace IoT.Web
 {
@@ -38,6 +39,9 @@ namespace IoT.Web
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
 
+            services.AddTransient<IDeviceRepository, DeviceRepository>();
+
+            services.AddTransient<IDeviceService, DeviceService>();
             services.AddTransient<IIdentityService, IdentityService>();
         }
 

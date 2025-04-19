@@ -20,7 +20,6 @@ namespace IoT.Web.Data.Repositories
 
         public void SetCreated(AbstractAuditEntity entity)
         {
-            entity.Id = Guid.NewGuid();
             entity.Created = DateTime.UtcNow;
         }
         public void SetUpdated(AbstractAuditEntity entity)

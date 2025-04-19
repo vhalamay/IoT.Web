@@ -6,6 +6,6 @@ namespace IoT.Web.Data.Entities.Abstract
     public abstract class AbstractEntity
     {
         [Key]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
     }
 }

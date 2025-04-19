@@ -16,5 +16,6 @@ namespace IoT.Web.Data
             base.OnModelCreating(builder);
         }
 
+        public DbSet<DeviceEntity> Devices { get; set; }
     }
 }
