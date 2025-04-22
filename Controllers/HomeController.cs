@@ -16,6 +16,7 @@ namespace IoT.Web.Controllers
         [HttpGet("devices/{id}/sessions")]
         // sessions
         [HttpGet("sessions")]
+        [HttpGet("sessions/{id}/dashboard")]
         public IActionResult Home()
         {
             return View("Index");

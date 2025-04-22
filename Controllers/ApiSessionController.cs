@@ -19,5 +19,9 @@ namespace IoT.Web.Controllers
         [HttpGet("api/sessions")]
         public async Task<SessionsResponse> GetSessions(SessionsRequest request) =>
             await _sessionService.GetSessions(request);
+
+        [HttpGet("api/sessions/{id}/dashboard")]
+        public async Task<SessionDashboardResponse> GetSessionDashboard(long id) =>
+            await _sessionService.GetSessionDashboard(id);
     }
 }

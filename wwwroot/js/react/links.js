@@ -10,6 +10,7 @@ const create = 'create';
 const edit = 'edit';
 const start = 'start';
 const finish = 'finish';
+const dashboard = 'dashboard';
 
 const identity = 'identity';
 const account = 'account';
@@ -37,7 +38,18 @@ export function Link_Sessions() {
     return `/${sessions}`;
 }
 
+export function Link_Session_Dashboard(sessionId){
+    sessionId ??= ':id';
+    return `/${sessions}/${sessionId}/${dashboard}`;
+}
+
 // API
+
+// Identity
+export function Api_Identity_Login() {
+    return `${api}/${identity}/${login}`;
+}
+
 // Devices
 export function Api_Devices() {
     return `${api}/${devices}`;
@@ -56,4 +68,7 @@ export function Api_Devices_Sessions(id) {
 // Sessions
 export function Api_Sessions() {
     return `${api}/${sessions}`;
+}
+export function Api_Session_Dashboard(id) {
+    return `${api}/${sessions}/${id}/${dashboard}`;
 }

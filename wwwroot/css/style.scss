@@ -1155,7 +1155,7 @@ $actn-btn-width-large: 90px;
 
 .l-tbl-sessions {
     .l-row {
-        $btns-width: 115px;
+        $btns-width: 225px;
         $date-width: 185px;
         $duration-width: 250px;
 
@@ -1468,7 +1468,7 @@ $actn-btn-width-large: 90px;
 .l-tbl-devices {
     
     .l-row {
-        $btns-width: 115px;
+        $btns-width: 110px;
         $actn-width: calc(1 * (5px + #{$actn-btn-width}));
         $actn-width-large: calc(1 * (5px + #{$actn-btn-width-large}));
 

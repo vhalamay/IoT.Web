@@ -7,5 +7,7 @@ namespace IoT.Web.Data.Repositories.Interfaces
     public interface ISessionRepository
     {
         Task<SessionsResponse> GetSessions(SessionsRequest request, long? deviceId = null);
+
+        Task<SessionDashboardResponse> GetSessionDashboard(long id);
     }
 }

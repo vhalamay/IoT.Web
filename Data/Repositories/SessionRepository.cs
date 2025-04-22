@@ -1,4 +1,5 @@
-﻿using IoT.Web.Data.Repositories.Interfaces;
+﻿using IoT.Web.Data.Entities;
+using IoT.Web.Data.Repositories.Interfaces;
 using IoT.Web.Extensions;
 using IoT.Web.Models.Requests.Sessions;
 using IoT.Web.Models.Responses.Devices;
@@ -35,6 +36,34 @@ namespace IoT.Web.Data.Repositories
             response.Items = viewSessions
                 .Select(s => new SessionResponse(s))
                 .ToList();
+
+            return response;
+        }
+
+        public async Task<SessionDashboardResponse> GetSessionDashboard(long id)
+        {
+            var activities = await Context.Activities
+                .Where(a => a.SessionId == id)
+                .Select(a => new ActivityEntity
+                {
+                    Type = a.Type,
+                    CreatedOn = a.CreatedOn
+                })
+                .ToListAsync();
+
+            var response = new SessionDashboardResponse();
+            for (int i = 0; i < activities.Count; i++)
+            {
+                if (i == 0)
+                {
+                    response.Items.Add(new SessionDashboardItemResponse(activities[i].Type, 0));
+                }
+                else
+                {
+                    var duration = activities[i].CreatedOn - activities[i - 1].CreatedOn;
+                    response.Items.Add(new SessionDashboardItemResponse(activities[i].Type, (int)duration.TotalSeconds));
+                }
+            }
 
             return response;
         }

@@ -10,6 +10,7 @@ import LoginContent from './views/identity/login';
 import DevicesContent  from './views/devices/devices';
 import DeviceSessionsContent from './views/devices/device-sessions';
 import SessionsContent  from './views/sessions/sessions';
+import SessionDashboardContent  from './views/sessions/dashboard';
 
 import * as Links from './links';
 
@@ -24,6 +25,7 @@ export default function App() {
                     <Route path={Links.Link_Devices()} element={<DevicesContent/>} />
                     <Route path={Links.Link_Device_Sessions()} element={<DeviceSessionsContent/>} />
                     <Route path={Links.Link_Sessions()} element={<SessionsContent/>} />
+                    <Route path={Links.Link_Session_Dashboard()} element={<SessionDashboardContent/>} />
 
                     <Route path="*" element={ <Layout/>} />
                 </Route>

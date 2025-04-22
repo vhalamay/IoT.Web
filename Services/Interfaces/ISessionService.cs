@@ -7,5 +7,6 @@ namespace IoT.Web.Services.Interfaces
     public interface ISessionService
     {
         Task<SessionsResponse> GetSessions(SessionsRequest request, long? deviceId = null);
+        Task<SessionDashboardResponse> GetSessionDashboard(long id);
     }
 }

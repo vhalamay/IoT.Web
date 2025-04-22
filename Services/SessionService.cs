@@ -17,5 +17,9 @@ namespace IoT.Web.Services
         {
             return _sessionRepository.GetSessions(request, deviceId);
         }
+        public Task<SessionDashboardResponse> GetSessionDashboard(long id)
+        {
+            return _sessionRepository.GetSessionDashboard(id);
+        }
     }
 }

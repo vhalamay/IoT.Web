@@ -11,6 +11,7 @@ import Lnk from '../buttons/lnk';
 import SearchInput from '../search-input';
 
 import {
+    Link_Session_Dashboard,
     Api_Devices_Sessions,
     Api_Sessions
 } from '../../links';
@@ -88,6 +89,7 @@ export default function SessionsTable(props) {
                 <span>{session.duration}</span>
             </div>
             <div className='l-clm btns'>
+                <Lnk text='Dashboard' isBtn={true} href={Link_Session_Dashboard(session.id)}/>
                 <Lnk text='Activities' isBtn={true} href={Api_Devices_Sessions(session.id)} count={session.activities}/>
             </div>
         </div>)
