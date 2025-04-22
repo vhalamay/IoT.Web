@@ -43,7 +43,7 @@ namespace IoT.Web.Data.Repositories
             return response;
         }
 
-        public async Task StartDevice(long deviceId, string userGuid)
+        public async Task<SessionEntity> StartDevice(long deviceId, string userGuid)
         {
             // device
             var device = await Context.Devices
@@ -72,6 +72,8 @@ namespace IoT.Web.Data.Repositories
             await Context.Activities.AddAsync(activity);
 
             await Context.SaveChangesAsync();
+
+            return session;
         }
         public async Task FinishDevice(long deviceId, string userGuid)
         {
@@ -115,6 +117,31 @@ namespace IoT.Web.Data.Repositories
             SetCreated(activity, userGuid);
             await Context.Activities.AddAsync(activity);
 
+            await Context.SaveChangesAsync();
+        }
+
+        public async Task CreateActivity(ActivityRequest request)
+        {
+            var device = await Context.Devices
+                .Where(d => d.Secret == request.DeviceSecret)
+                .FirstOrDefaultAsync();
+
+            var session = await Context.Sessions
+                .Where(s => !s.UpdatedOn.HasValue && s.DeviceId == device.Id)
+                .OrderByDescending(s => s.CreatedOn)
+                .FirstOrDefaultAsync();
+
+            session ??= await StartDevice(device.Id, device.Updatedby ?? device.CreatedBy);
+
+            var activity = new ActivityEntity
+            {
+                SessionId = session.Id,
+                Type = request.Type,
+            };
+
+            SetCreated(activity, session.CreatedBy);
+
+            await Context.Activities.AddAsync(activity);
             await Context.SaveChangesAsync();
         }
     }

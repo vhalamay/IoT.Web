@@ -2,8 +2,8 @@
 using IoT.Web.Models.Requests.Sessions;
 using IoT.Web.Models.Responses.Devices;
 using IoT.Web.Models.Responses.Sessions;
-using IoT.Web.Services;
 using IoT.Web.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -38,5 +38,10 @@ namespace IoT.Web.Controllers
         [HttpGet("api/devices/{id}/sessions")]
         public async Task<SessionsResponse> GetSessions([FromRoute] long id, [FromQuery] SessionsRequest request) =>
             await _sessionService.GetSessions(request, id);
+
+        [AllowAnonymous]
+        [HttpPost("api/devices/activities")]
+        public async Task CreateSessionActivity([FromBody] ActivityRequest request) =>
+            await _deviceService.CreateActivity(request);
     }
 }

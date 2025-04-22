@@ -9,5 +9,6 @@ namespace IoT.Web.Services.Interfaces
         Task<DevicesResponse> GetDevices(DevicesRequest request);
         Task StartDevice(long deviceId, string userGuid);
         Task FinishDevice(long deviceId, string userGuid);
+        Task CreateActivity(ActivityRequest request);
     }
 }

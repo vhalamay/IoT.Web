@@ -25,5 +25,10 @@ namespace IoT.Web.Services
         {
             await _deviceRepository.FinishDevice(deviceId, userGuid);
         }
+
+        public async Task CreateActivity(ActivityRequest request)
+        {
+            await _deviceRepository.CreateActivity(request);
+        }
     }
 }
