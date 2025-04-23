@@ -112,7 +112,7 @@ export default function DevicesTable(props) {
                 <Lnk href={Link_Device_Edit(device.id)} text={device.name}/>
             </div>
             <div className='l-clm btns'>
-                <Lnk text='Sessions' isBtn={true} href={Link_Device_Sessions(device.id)} count={228}/>
+                <Lnk text='Sessions' isBtn={true} href={Link_Device_Sessions(device.id)} count={device.sessions}/>
             </div>
             <div className='l-clm actn'>
                 <Lnk text='Start' icon={faPlay} isBtn={true} hide={device.active === true} onClick={()=>(startDevice(device.id))} className='l-green'/>

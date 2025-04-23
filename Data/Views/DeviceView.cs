@@ -1,8 +1,6 @@
-﻿using IoT.Web.Data.Entities;
-
-namespace IoT.Web.Models.Responses.Devices
+﻿namespace IoT.Web.Data.Views
 {
-    public class DeviceResponse
+    public class DeviceView
     {
         public long Id { get; set; }
         public string Name { get; set; }

@@ -17,6 +17,10 @@ namespace IoT.Web.Data
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<DeviceView>()
+                .HasNoKey()
+                .ToView(nameof(ViewDevices));
+
             builder.Entity<SessionView>()
                 .HasNoKey()
                 .ToView(nameof(ViewSessions));
@@ -25,5 +29,6 @@ namespace IoT.Web.Data
         public DbSet<DeviceEntity> Devices { get; set; }
         public DbSet<SessionEntity> Sessions { get; set; }
         public DbSet<SessionView> ViewSessions { get; set; }
+        public DbSet<DeviceView> ViewDevices { get; set; }
     }
 }

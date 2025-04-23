@@ -17,13 +17,13 @@ namespace IoT.Web.Data.Repositories
         }
         public async Task<DevicesResponse> GetDevices(DevicesRequest request)
         {
-            var count = await Context.Devices.CountAsync();
+            var query = Context.ViewDevices.AsQueryable();
+
+            var count = await query.CountAsync();
             var response = new DevicesResponse
             {
                 Count = count
             };
-
-            var query = Context.Devices.AsQueryable();
 
             if(!string.IsNullOrWhiteSpace(request.Name))
                 query = query.Where(q => q.Name.Contains(request.Name));
@@ -33,7 +33,8 @@ namespace IoT.Web.Data.Repositories
                 { 
                     Id = d.Id,
                     Name = d.Name,
-                    Active = d.Active
+                    Active = d.Active,
+                    Sessions = d.Sessions,
                 })
                 .OrderBy(o => o.Name)
                 .Skip(request.GetSkip(response.Count))
