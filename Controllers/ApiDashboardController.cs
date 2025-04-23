@@ -23,5 +23,17 @@ namespace IoT.Web.Controllers
         [HttpGet("api/dashboard/session-activity/{deviceId}")]
         public async Task<SessionActivityResponse> GetSessionActivity(long deviceId) =>
             await _dashboardService.GetSessionActivityResponse(deviceId);
+
+        [HttpGet("api/dashboard/activity-types")]
+        public async Task<ActivityTypesResponse> GetActivityTypes() =>
+            await _dashboardService.GetActivityTypes();
+
+        [HttpGet("api/dashboard/activity-types/devices/{deviceId}")]
+        public async Task<ActivityTypesResponse> GetActivityTypesForDevice(long deviceId) =>
+            await _dashboardService.GetActivityTypesForDevice(deviceId);
+
+        [HttpGet("api/dashboard/activity-types/sessions/{sessionId}")]
+        public async Task<ActivityTypesResponse> GetActivityTypesForSession(long sessionId) =>
+            await _dashboardService.GetActivityTypesForSession(sessionId);
     }
 }

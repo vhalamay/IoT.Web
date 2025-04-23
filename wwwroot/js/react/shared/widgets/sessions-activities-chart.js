@@ -18,7 +18,7 @@ import {
     Api_Dashboard_SessionActivity
   } from '../../links';
 
-export default function SessionActivityChart(props) {
+export default function SessionsActivitiesChart(props) {
   let [data, setData] = useState();
 
   let url = props.deviceId === undefined
@@ -39,9 +39,9 @@ export default function SessionActivityChart(props) {
   },[]);  
 
   return (
-    <div>
+    <div className='sessions-activities-chart'>
         <h4>Sessions & Activities Chart</h4>
-        <ResponsiveContainer width={"100%"} height={250}>
+        <ResponsiveContainer width={"100%"} height={400}>
         <BarChart
             data={data}
             margin={{
@@ -57,12 +57,12 @@ export default function SessionActivityChart(props) {
             <Tooltip />
             <Bar
             dataKey="sessions"
-            fill="#1982c4"
+            fill="#1982c4" fillOpacity={0.7}
             activeBar={<Rectangle fill="#f1ba0a" stroke="1982c4" />}
             />
             <Bar
             dataKey="activities"
-            fill="#f1ba0a"
+            fill="#f1ba0a" fillOpacity={0.7}
             activeBar={<Rectangle fill="#1982c4" stroke="f1ba0a" />}
             />
         </BarChart>

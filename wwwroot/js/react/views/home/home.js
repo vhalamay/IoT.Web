@@ -1,10 +1,10 @@
 import React from 'react';
-import SessionActivityChart from '../../shared/widgets/session-activity-chart';
-import ActivitiesRadarChart from '../../shared/widgets/activities-radar-chart';
+import SessionsActivitiesChart from '../../shared/widgets/sessions-activities-chart';
+import ActivityTypesChart from '../../shared/widgets/activity-types-chart';
 
 export default function HomeContent(props) {
-    return <div>
-        <SessionActivityChart />
-        <ActivitiesRadarChart />
+    return <div className='charts'>
+        <ActivityTypesChart />
+        <SessionsActivitiesChart />
     </div>;
 }

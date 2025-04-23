@@ -19,5 +19,15 @@ namespace IoT.Web.Services
 
         public Task<SessionActivityResponse> GetSessionActivityResponse(long deviceId) => 
             _dashboardRepository.GetSessionActivityResponse(deviceId);
+
+        public Task<ActivityTypesResponse> GetActivityTypes() =>
+            _dashboardRepository.GetActivityTypes();
+
+        public Task<ActivityTypesResponse> GetActivityTypesForDevice(long deviceId) =>
+            _dashboardRepository.GetActivityTypesForDevice(deviceId);
+
+        public Task<ActivityTypesResponse> GetActivityTypesForSession(long sessionId) =>
+            _dashboardRepository.GetActivityTypesForSession(sessionId);
+
     }
 }

@@ -7,5 +7,9 @@ namespace IoT.Web.Services.Interfaces
     {
         Task<SessionActivityResponse> GetSessionActivityResponse();
         Task<SessionActivityResponse> GetSessionActivityResponse(long deviceId);
+
+        Task<ActivityTypesResponse> GetActivityTypes();
+        Task<ActivityTypesResponse> GetActivityTypesForDevice(long deviceId);
+        Task<ActivityTypesResponse> GetActivityTypesForSession(long sessionId);
     }
 }

@@ -1,10 +1,11 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import TextHrefItem from '../../models/text-href-item'
 import Breadcrumb from '../../shared/breadcrumb';
 import { SetTitle_Act } from './../../titles';
-import InvertedLineChart from "./../../shared/widgets/line-chart";
-import { useParams } from 'react-router-dom';
+import SessionActivitiesChart from "../../shared/widgets/session-activities-chart";
+import ActivityTypesChart from '../../shared/widgets/activity-types-chart';
 
 export default function SessionDashboardContent() {
     let { id } = useParams();
@@ -15,6 +16,9 @@ export default function SessionDashboardContent() {
 
     return <div>
                 <Breadcrumb breadcrumbs={breadcrumbs} />
-                <InvertedLineChart sessionId={id} />
+                <div className='charts'>
+                    <ActivityTypesChart sessionId={id}/>
+                    <SessionActivitiesChart sessionId={id} />
+                </div>
             </div>;
 }

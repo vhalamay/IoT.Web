@@ -57,5 +57,59 @@ namespace IoT.Web.Data.Repositories
                 Items = items
             };
         }
+
+        public async Task<ActivityTypesResponse> GetActivityTypes()
+        {
+            var items = await Context.Activities
+                .GroupBy(g => g.Type)
+                .Select(s => new ActivityTypeResponse
+                {
+                    Type = s.Key,
+                    Count = s.Count()
+                })
+                .ToListAsync();
+
+            return new ActivityTypesResponse
+            {
+                Items = items
+            };
+        }
+
+        public async Task<ActivityTypesResponse> GetActivityTypesForDevice(long deviceId)
+        {
+            var items = await Context.Sessions
+                .Where(d => d.DeviceId == deviceId)
+                .SelectMany(s => s.Activities)
+                .GroupBy(g => g.Type)
+                .Select(s => new ActivityTypeResponse
+                {
+                    Type = s.Key,
+                    Count = s.Count()
+                })
+                .ToListAsync();
+
+            return new ActivityTypesResponse
+            {
+                Items = items
+            };
+        }
+
+        public async Task<ActivityTypesResponse> GetActivityTypesForSession(long sessionId)
+        {
+            var items = await Context.Activities
+                .Where(w => w.SessionId == sessionId)
+                .GroupBy(g => g.Type)
+                .Select(s => new ActivityTypeResponse
+                {
+                    Type = s.Key,
+                    Count = s.Count()
+                })
+                .ToListAsync();
+
+            return new ActivityTypesResponse
+            {
+                Items = items
+            };
+        }
     }
 }

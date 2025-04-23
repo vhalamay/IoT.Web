@@ -65,6 +65,18 @@ export function Api_Dashboard_DeviceSessionActivity(id) {
     return `${Api_Dashboard_SessionActivity()}/${id}`;
 }
 
+export function Api_Dashboard_ActivityTypes() {
+    return `${api}/${dashboard}/activity-types`;
+}
+
+export function Api_Dashboard_ActivityTypes_Session(sessionId) {
+    return `${api}/${dashboard}/activity-types/${sessions}/${sessionId}`;
+}
+
+export function Api_Dashboard_ActivityTypes_Device(deviceId) {
+    return `${api}/${dashboard}/activity-types/${devices}/${deviceId}`;
+}
+
 // Devices
 export function Api_Devices() {
     return `${api}/${devices}`;

@@ -24,7 +24,7 @@ const activityLabels = {
   5: "Finished",
 };
 
-export default function InvertedLineChart(props) {
+export default function SessionActivitiesChart(props) {
   let [data, setData] = useState();
 
   const getData = () => {
@@ -41,9 +41,9 @@ export default function InvertedLineChart(props) {
   },[]);  
 
   return (
-    <div className="chart-wrapper">
-      <h4>Session Activity Chart</h4>
-      <ResponsiveContainer width="100%" height={250}>
+    <div className="session-activities-chart">
+      <h4>Session Activities Chart</h4>
+      <ResponsiveContainer width="100%" height={400}>
         <LineChart data={data}>
           <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />
           <XAxis

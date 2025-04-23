@@ -1521,3 +1521,19 @@ $actn-btn-width-large: 90px;
         }
     }
 }
+
+.charts {
+    display: flex;
+
+    .activity-types-chart{
+        width: 40%;
+    }
+    
+    .session-activities-chart {
+        width: 60%;
+    }
+
+    .sessions-activities-chart {
+        width: 60%;
+    }
+}

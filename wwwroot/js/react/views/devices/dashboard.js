@@ -3,7 +3,8 @@ import React from 'react';
 import TextHrefItem from '../../models/text-href-item'
 import Breadcrumb from '../../shared/breadcrumb';
 import { SetTitle_Act } from './../../titles';
-import SessionActivityChart from "./../../shared/widgets/session-activity-chart";
+import ActivityTypesChart from "../../shared/widgets/activity-types-chart";
+import SessionsActivitiesChart from "../../shared/widgets/sessions-activities-chart";
 import { useParams } from 'react-router-dom';
 
 export default function DeviceDashboardContent() {
@@ -15,6 +16,9 @@ export default function DeviceDashboardContent() {
 
     return <div>
                 <Breadcrumb breadcrumbs={breadcrumbs} />
-                <SessionActivityChart deviceId={id} />
+                <div className='charts'>
+                    <ActivityTypesChart deviceId={id}/>
+                    <SessionsActivitiesChart deviceId={id} />
+                </div>
             </div>;
 }
