@@ -13,6 +13,7 @@ namespace IoT.Web.Controllers
 
         // devices
         [HttpGet("devices")]
+        [HttpGet("devices/{id}/dashboard")]
         [HttpGet("devices/{id}/sessions")]
         // sessions
         [HttpGet("sessions")]

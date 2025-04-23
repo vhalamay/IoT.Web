@@ -1,9 +1,10 @@
 import React from 'react';
-
-import ProgressWidgets from './_progress-widgets';
+import SessionActivityChart from '../../shared/widgets/session-activity-chart';
+import ActivitiesRadarChart from '../../shared/widgets/activities-radar-chart';
 
 export default function HomeContent(props) {
-    return  <div>
-                <ProgressWidgets />
-            </div>;
+    return <div>
+        <SessionActivityChart />
+        <ActivitiesRadarChart />
+    </div>;
 }

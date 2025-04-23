@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using IoT.Web.Data.Entities;
 using IoT.Web.Data.Views;
-using IoT.Web.Data.Scripts;
 
 namespace IoT.Web.Data
 {
@@ -21,6 +20,14 @@ namespace IoT.Web.Data
                 .HasNoKey()
                 .ToView(nameof(ViewDevices));
 
+            builder.Entity<DeviceSessionActivityCountView>()
+                .HasNoKey()
+                .ToView(nameof(ViewDeviceSessionActivityCounts));
+
+            builder.Entity<SessionActivityCountView>()
+                .HasNoKey()
+                .ToView(nameof(ViewSessionActivityCounts));
+
             builder.Entity<SessionView>()
                 .HasNoKey()
                 .ToView(nameof(ViewSessions));
@@ -28,7 +35,10 @@ namespace IoT.Web.Data
         public DbSet<ActivityEntity> Activities { get; set; }
         public DbSet<DeviceEntity> Devices { get; set; }
         public DbSet<SessionEntity> Sessions { get; set; }
-        public DbSet<SessionView> ViewSessions { get; set; }
+
         public DbSet<DeviceView> ViewDevices { get; set; }
+        public DbSet<DeviceSessionActivityCountView> ViewDeviceSessionActivityCounts { get; set; }
+        public DbSet<SessionActivityCountView> ViewSessionActivityCounts { get; set; }
+        public DbSet<SessionView> ViewSessions { get; set; }
     }
 }

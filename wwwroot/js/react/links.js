@@ -25,6 +25,12 @@ export function Link_Identity_Login() {
 export function Link_Devices() {
     return `/${devices}`;
 }
+
+export function Link_Device_Dashboard(deviceId){
+    deviceId ??= ':id';
+    return `/${devices}/${deviceId}/${dashboard}`;
+}
+
 export function Link_Device_Edit() {
     return `/${devices}/${edit}`;
 }
@@ -48,6 +54,15 @@ export function Link_Session_Dashboard(sessionId){
 // Identity
 export function Api_Identity_Login() {
     return `${api}/${identity}/${login}`;
+}
+
+// Dashboard
+export function Api_Dashboard_SessionActivity() {
+    return `${api}/${dashboard}/session-activity`;
+}
+
+export function Api_Dashboard_DeviceSessionActivity(id) {
+    return `${Api_Dashboard_SessionActivity()}/${id}`;
 }
 
 // Devices

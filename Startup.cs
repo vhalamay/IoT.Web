@@ -39,9 +39,11 @@ namespace IoT.Web
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
 
+            services.AddTransient<IDashboardRepository, DashboardRepository>();
             services.AddTransient<IDeviceRepository, DeviceRepository>();
             services.AddTransient<ISessionRepository, SessionRepository>();
 
+            services.AddTransient<IDashboardService, DashboardService>();
             services.AddTransient<IDeviceService, DeviceService>();
             services.AddTransient<IIdentityService, IdentityService>();
             services.AddTransient<ISessionService, SessionService>();

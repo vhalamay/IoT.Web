@@ -42,6 +42,7 @@ export default function InvertedLineChart(props) {
 
   return (
     <div className="chart-wrapper">
+      <h4>Session Activity Chart</h4>
       <ResponsiveContainer width="100%" height={250}>
         <LineChart data={data}>
           <CartesianGrid stroke="#ccc" strokeDasharray="3 3" />

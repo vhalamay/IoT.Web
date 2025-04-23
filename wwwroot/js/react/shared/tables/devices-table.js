@@ -13,6 +13,7 @@ import Lnk from '../buttons/lnk';
 import {
     Link_Device_Edit,
     Link_Device_Sessions,
+    Link_Device_Dashboard,
     Api_Devices,
     Api_Devices_Start,
     Api_Devices_Finish
@@ -112,6 +113,7 @@ export default function DevicesTable(props) {
                 <Lnk href={Link_Device_Edit(device.id)} text={device.name}/>
             </div>
             <div className='l-clm btns'>
+                <Lnk text='Dashboard' isBtn={true} href={Link_Device_Dashboard(device.id)}/>
                 <Lnk text='Sessions' isBtn={true} href={Link_Device_Sessions(device.id)} count={device.sessions}/>
             </div>
             <div className='l-clm actn'>
