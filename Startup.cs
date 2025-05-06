@@ -46,6 +46,7 @@ namespace IoT.Web
             services.AddTransient<IDashboardService, DashboardService>();
             services.AddTransient<IDeviceService, DeviceService>();
             services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<IImageRecognitionService, ImageRecognitionService>();
             services.AddTransient<ISessionService, SessionService>();
         }
 
