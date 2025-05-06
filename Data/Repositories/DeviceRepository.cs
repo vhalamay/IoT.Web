@@ -2,6 +2,7 @@
 using IoT.Web.Data.Entities;
 using IoT.Web.Data.Repositories.Interfaces;
 using IoT.Web.Extensions;
+using IoT.Web.Models.Enums;
 using IoT.Web.Models.Requests.Devices;
 using IoT.Web.Models.Responses.Devices;
 using Microsoft.EntityFrameworkCore;
@@ -25,12 +26,12 @@ namespace IoT.Web.Data.Repositories
                 Count = count
             };
 
-            if(!string.IsNullOrWhiteSpace(request.Name))
+            if (!string.IsNullOrWhiteSpace(request.Name))
                 query = query.Where(q => q.Name.Contains(request.Name));
 
             response.Items = await query
-                .Select(d => new DeviceResponse 
-                { 
+                .Select(d => new DeviceResponse
+                {
                     Id = d.Id,
                     Name = d.Name,
                     Active = d.Active,
@@ -93,7 +94,7 @@ namespace IoT.Web.Data.Repositories
                 .OrderByDescending(s => s.CreatedOn)
                 .FirstOrDefaultAsync();
 
-            if(session != null)
+            if (session != null)
             {
                 SetUpdated(session, userGuid);
                 Context.Sessions.Update(session);
@@ -127,12 +128,35 @@ namespace IoT.Web.Data.Repositories
                 .Where(d => d.Secret == request.DeviceSecret)
                 .FirstOrDefaultAsync();
 
+            var userGuid = device.Updatedby ?? device.CreatedBy;
+
             var session = await Context.Sessions
                 .Where(s => !s.UpdatedOn.HasValue && s.DeviceId == device.Id)
                 .OrderByDescending(s => s.CreatedOn)
                 .FirstOrDefaultAsync();
 
-            session ??= await StartDevice(device.Id, device.Updatedby ?? device.CreatedBy);
+            // Not Started but Session null
+            if (request.Type != ActivityType.Started && session == null)
+            {
+                session ??= await StartDevice(device.Id, userGuid);
+            }
+
+            // Started
+            if (request.Type == ActivityType.Started)
+            {
+                if (session != null)
+                    await FinishDevice(device.Id, userGuid);
+
+                session = await StartDevice(device.Id, userGuid);
+                return;
+            }
+
+            // Finished
+            if (request.Type == ActivityType.Finished)
+            {
+                await FinishDevice(device.Id, userGuid);
+                return;
+            }
 
             var activity = new ActivityEntity
             {
