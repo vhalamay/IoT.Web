@@ -1,6 +1,7 @@
 ﻿using IoT.Web.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace IoT.Web.Extensions
 {
@@ -51,7 +52,7 @@ namespace IoT.Web.Extensions
                 timeComponents.Add($"{duration.Seconds} secs");
 
             // Join the components with commas and output the result
-            var result = string.Join(",\n", timeComponents);
+            var result = string.Join(",\n", timeComponents.Take(3));
 
             // If all are zero, display that as well
             if (string.IsNullOrEmpty(result))
