@@ -1,11 +1,12 @@
-﻿using Azure;
-using IoT.Web.Data.Entities;
+﻿using IoT.Web.Data.Entities;
 using IoT.Web.Data.Repositories.Interfaces;
+using IoT.Web.Exceptions;
 using IoT.Web.Extensions;
 using IoT.Web.Models.Enums;
 using IoT.Web.Models.Requests.Devices;
 using IoT.Web.Models.Responses.Devices;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -64,15 +65,6 @@ namespace IoT.Web.Data.Repositories
             SetCreated(session, userGuid);
             await Context.Sessions.AddAsync(session);
 
-            // activity
-            var activity = new ActivityEntity
-            {
-                Session = session,
-                Type = Models.Enums.ActivityType.Started
-            };
-            SetCreated(activity, userGuid);
-            await Context.Activities.AddAsync(activity);
-
             await Context.SaveChangesAsync();
 
             return session;
@@ -110,20 +102,14 @@ namespace IoT.Web.Data.Repositories
                 await Context.Sessions.AddAsync(session);
             }
 
-            // activity
-            var activity = new ActivityEntity
-            {
-                Session = session,
-                Type = Models.Enums.ActivityType.Finished
-            };
-            SetCreated(activity, userGuid);
-            await Context.Activities.AddAsync(activity);
-
             await Context.SaveChangesAsync();
         }
 
         public async Task CreateActivity(ActivityRequest request)
         {
+            using var transaction = await Context.Database
+                .BeginTransactionAsync(IsolationLevel.Serializable);
+
             var device = await Context.Devices
                 .Where(d => d.Secret == request.DeviceSecret)
                 .FirstOrDefaultAsync();
@@ -135,28 +121,14 @@ namespace IoT.Web.Data.Repositories
                 .OrderByDescending(s => s.CreatedOn)
                 .FirstOrDefaultAsync();
 
-            // Not Started but Session null
-            if (request.Type != ActivityType.Started && session == null)
-            {
-                session ??= await StartDevice(device.Id, userGuid);
-            }
 
             // Started
             if (request.Type == ActivityType.Started)
-            {
-                if (session != null)
-                    await FinishDevice(device.Id, userGuid);
-
-                session = await StartDevice(device.Id, userGuid);
-                return;
-            }
+                session ??= await StartDevice(device.Id, userGuid);
 
             // Finished
             if (request.Type == ActivityType.Finished)
-            {
                 await FinishDevice(device.Id, userGuid);
-                return;
-            }
 
             var activity = new ActivityEntity
             {
@@ -168,6 +140,17 @@ namespace IoT.Web.Data.Repositories
 
             await Context.Activities.AddAsync(activity);
             await Context.SaveChangesAsync();
+            await transaction.CommitAsync();
+        }
+
+        public async Task<bool> GetStatus(string secret)
+        {
+            var device = await Context.Devices
+                .Where(d => d.Secret == secret)
+                .FirstOrDefaultAsync()
+                ?? throw new NotFoundException("Device not found");
+
+            return device.Active;
         }
     }
 }

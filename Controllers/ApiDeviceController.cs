@@ -48,5 +48,11 @@ namespace IoT.Web.Controllers
         [HttpPost("api/devices/images")]
         public async Task<long> CreateImage([FromBody] ImageRequest request) => 
             await _deviceService.CreateImage(request);
+
+
+        [AllowAnonymous]
+        [HttpGet("api/devices/{secret}/status")]
+        public async Task<bool> GetStatus(string secret) =>
+            await _deviceService.GetStatus(secret);
     }
 }

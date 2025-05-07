@@ -4,6 +4,8 @@ namespace IoT.Web.Exceptions
 {
     public class NotFoundException : Exception
     {
+        public NotFoundException(string message)
+            : base(message) { }
         public NotFoundException(string entity, Guid id) 
             : base($"Not Found: {entity} ({id})") { }
 

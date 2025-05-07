@@ -75,5 +75,8 @@ namespace IoT.Web.Services
 
             return imageGuid;
         }
+
+        public Task<bool> GetStatus(string secret) => 
+            _deviceRepository.GetStatus(secret);
     }
 }
