@@ -41,6 +41,7 @@ namespace IoT.Web
 
             services.AddTransient<IDashboardRepository, DashboardRepository>();
             services.AddTransient<IDeviceRepository, DeviceRepository>();
+            services.AddTransient<IImageRepository, ImageRepository>();
             services.AddTransient<ISessionRepository, SessionRepository>();
 
             services.AddTransient<IDashboardService, DashboardService>();

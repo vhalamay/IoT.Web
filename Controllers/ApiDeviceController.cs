@@ -43,5 +43,10 @@ namespace IoT.Web.Controllers
         [HttpPost("api/devices/activities")]
         public async Task CreateSessionActivity([FromBody] ActivityRequest request) =>
             await _deviceService.CreateActivity(request);
+
+        [AllowAnonymous]
+        [HttpPost("api/devices/images")]
+        public async Task<long> CreateImage([FromBody] ImageRequest request) => 
+            await _deviceService.CreateImage(request);
     }
 }

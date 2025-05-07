@@ -6,14 +6,18 @@ using System.IO;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using System.Collections.Generic;
+using IoT.Web.Models.Responses.Images;
+using System.Linq;
+using IoT.Web.Constants;
 
 namespace IoT.Web.Services
 {
     public class ImageRecognitionService : IImageRecognitionService
     {
-        public async Task Recognize()
+        public async Task<List<string>> Recognize(Guid imageGuid)
         {
-            var imagePath = "Images\\Screenshot 2025-03-11 185058.png";
+            var imagePath = string.Format(ImageConstants.ImagePath, imageGuid);
 
             var apiKey = "adb9a437b579460db7e29f0c324551ba";
 
@@ -40,9 +44,10 @@ namespace IoT.Web.Services
 
             var response = await client.PostAsync("https://api.clarifai.com/v2/models/general-image-recognition/outputs", content);
             var responseBody = await response.Content.ReadAsStringAsync();
+            var clarifaiResponse = JsonSerializer.Deserialize<ClarifaiResponse>(responseBody);
 
-            Console.WriteLine(responseBody);
+            return clarifaiResponse.Outputs[0].Data.Concepts
+                .Select(s => s.Name).Take(5).ToList();
         }
     }
-
 }

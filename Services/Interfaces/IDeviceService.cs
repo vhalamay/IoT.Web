@@ -10,5 +10,6 @@ namespace IoT.Web.Services.Interfaces
         Task StartDevice(long deviceId, string userGuid);
         Task FinishDevice(long deviceId, string userGuid);
         Task CreateActivity(ActivityRequest request);
+        Task<long> CreateImage(ImageRequest request);
     }
 }

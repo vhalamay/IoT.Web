@@ -34,6 +34,7 @@ namespace IoT.Web.Data
         }
         public DbSet<ActivityEntity> Activities { get; set; }
         public DbSet<DeviceEntity> Devices { get; set; }
+        public DbSet<ImageEntity> Images { get; set; }
         public DbSet<SessionEntity> Sessions { get; set; }
 
         public DbSet<DeviceView> ViewDevices { get; set; }

@@ -11,9 +11,9 @@
 	                    d.[Id], 
 	                    [Name], 
 	                    [Active],
-	                    COUNT(*) [Sessions]
+	                    COUNT(DISTINCT s.Id) [Sessions]
                     FROM [Devices] d
-                    JOIN [Sessions] s ON s.DeviceId = d.[Id]
+                    LEFT JOIN [Sessions] s ON s.DeviceId = d.[Id]
                     WHERE d.[Deleted] = 0
                     GROUP BY d.[Id], [Name], [Active] 
             ";
