@@ -12,6 +12,7 @@ import DeviceSessionsContent from './views/devices/device-sessions';
 import DeviceDashboardContent from './views/devices/dashboard';
 import SessionsContent  from './views/sessions/sessions';
 import SessionDashboardContent  from './views/sessions/dashboard';
+import SessionImagesContent  from './views/sessions/images';
 
 import * as Links from './links';
 
@@ -28,6 +29,8 @@ export default function App() {
                     <Route path={Links.Link_Sessions()} element={<SessionsContent/>} />
                     <Route path={Links.Link_Session_Dashboard()} element={<SessionDashboardContent/>} />
                     <Route path={Links.Link_Device_Dashboard()} element={<DeviceDashboardContent/>} />
+                    <Route path={Links.Link_Device_Dashboard()} element={<DeviceDashboardContent/>} />
+                    <Route path={Links.Link_Session_Images()} element={<SessionImagesContent/>} />
 
                     <Route path="*" element={ <Layout/>} />
                 </Route>

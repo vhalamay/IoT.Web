@@ -24,6 +24,10 @@ namespace IoT.Web.Data
                 .HasNoKey()
                 .ToView(nameof(ViewDeviceSessionActivityCounts));
 
+            builder.Entity<ImageView>()
+                .HasNoKey()
+                .ToView(nameof(ViewImages));
+
             builder.Entity<SessionActivityCountView>()
                 .HasNoKey()
                 .ToView(nameof(ViewSessionActivityCounts));
@@ -39,6 +43,7 @@ namespace IoT.Web.Data
 
         public DbSet<DeviceView> ViewDevices { get; set; }
         public DbSet<DeviceSessionActivityCountView> ViewDeviceSessionActivityCounts { get; set; }
+        public DbSet<ImageView> ViewImages { get; set; }
         public DbSet<SessionActivityCountView> ViewSessionActivityCounts { get; set; }
         public DbSet<SessionView> ViewSessions { get; set; }
     }

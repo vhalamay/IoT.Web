@@ -2,6 +2,6 @@
 {
     public class ImageConstants
     {
-        public static string ImagePath = "Images\\{0}.jpg";
+        public static string ImagePath = "wwwroot\\images\\{0}.jpg";
     }
 }

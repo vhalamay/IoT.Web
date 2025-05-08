@@ -2,21 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { GetFromStorage, SetToStorage } from '../../extensions/local-storage';
-import Paging from '../../shared/paging';
-import NoItems from '../../shared/no-items';
-import Loader from '../../shared/loader';
-import Lnk from '../buttons/lnk';
+import Paging from '../paging';
+import NoItems from '../no-items';
+import Loader from '../loader';
 import SearchInput from '../search-input';
 
 import {
-    Link_Session_Dashboard,
-    Link_Session_Images,
-    Api_Devices_Sessions,
-    Api_Sessions
+    Api_Session_Images
 } from '../../links';
 
-export default function SessionsTable(props) {
-    const elementId = 'sessions-';
+export default function ImagesTable(props) {
+    const elementId = 'images-';
     const pageId = elementId + 'page';
     const filterNameId = elementId + 'filter-name';
 
@@ -28,9 +24,7 @@ export default function SessionsTable(props) {
         setLoaded(false);
 
         let isFirstParam = false;
-        let href = props.deviceId !== undefined
-            ? Api_Devices_Sessions(props.deviceId)
-            : Api_Sessions();
+        let href = Api_Session_Images(props.sessionId);
         
         // name
         if(filterName !== ''){
@@ -65,31 +59,24 @@ export default function SessionsTable(props) {
         getItems();
     },[]);
 
-    const deleteSession = (id) => {
-        setLoaded(false);
-
-        axios
-        .delete(Api_Session_Delete(id))
-        .then(function (response) {
-            if(response.status === 200) {
-                getItems();
-            }
-        })
-    }
-    const items = dataTable ? dataTable.items.length === 0 ? <NoItems/> : dataTable.items.map((session, index) => 
+    const items = dataTable ? dataTable.items.length === 0 ? <NoItems/> : dataTable.items.map((image, index) => 
         <div className='l-row' key={index}>
-            <div className='l-clm info'>
-                <Lnk href="#" text={session.device}/>
-            </div>
-            <div className='l-clm date'>
-                <span>{session.start}</span>
-            </div>
-            <div className='l-clm duration'>
-                <span>{session.duration}</span>
-            </div>
-            <div className='l-clm btns'>
-                <Lnk text='Dashboard' isBtn={true} href={Link_Session_Dashboard(session.id)}/>
-                <Lnk text='Activities' isBtn={true} href={Link_Session_Images(session.id)} count={session.activities}/>
+            <a href={`/images/${image.imageGuid}.jpg`} target="_blank" rel="noopener noreferrer">
+                <img src={`/images/${image.imageGuid}.jpg`} alt={image.activityType} />
+            </a>
+            <div>
+                <div className='img-info'>
+                    <b>Activity Type:</b>
+                    <span>{image.activityType}</span>
+                </div>
+                <div className='img-info'>
+                    <b>Created on:</b>
+                    <span>{image.createdOn}</span>
+                </div>
+                <div className='img-info'>
+                    <b>Objects:</b>
+                    <span>{image.objects}</span>
+                </div>
             </div>
         </div>)
         : <NoItems/>;
@@ -103,7 +90,7 @@ export default function SessionsTable(props) {
                 </div>;
 
     return loaded === false ? <Loader /> : 
-            <div className='l-tbl-sessions'>
+            <div className='l-tbl-images'>
                 {paging}
                 <div className='l-fltr-tbl'>
                     {filters}

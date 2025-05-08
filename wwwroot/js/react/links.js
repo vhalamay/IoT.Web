@@ -2,7 +2,7 @@ const api = '/api';
 
 const devices = 'devices';
 const sessions = 'sessions';
-const users = 'users';
+const images = 'images';
 const lookup = 'lookup';
 const widgets = 'widgets';
 
@@ -47,6 +47,10 @@ export function Link_Sessions() {
 export function Link_Session_Dashboard(sessionId){
     sessionId ??= ':id';
     return `/${sessions}/${sessionId}/${dashboard}`;
+}
+export function Link_Session_Images(sessionId){
+    sessionId ??= ':id';
+    return `/${sessions}/${sessionId}/${images}`;
 }
 
 // API
@@ -98,4 +102,7 @@ export function Api_Sessions() {
 }
 export function Api_Session_Dashboard(id) {
     return `${api}/${sessions}/${id}/${dashboard}`;
+}
+export function Api_Session_Images(id) {
+    return `${api}/${sessions}/${id}/${images}`;
 }

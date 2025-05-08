@@ -1,4 +1,5 @@
 ﻿using IoT.Web.Models.Requests.Sessions;
+using IoT.Web.Models.Responses.Images;
 using IoT.Web.Models.Responses.Sessions;
 using IoT.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -23,5 +24,9 @@ namespace IoT.Web.Controllers
         [HttpGet("api/sessions/{id}/dashboard")]
         public async Task<SessionDashboardResponse> GetSessionDashboard(long id) =>
             await _sessionService.GetSessionDashboard(id);
+
+        [HttpGet("api/sessions/{id}/images")]
+        public async Task<ImagesResponse> GetSessionImages(long id, ImagesRequest request) =>
+            await _sessionService.GetSessionImages(id, request);
     }
 }

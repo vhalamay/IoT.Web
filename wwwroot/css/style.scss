@@ -1522,6 +1522,24 @@ $actn-btn-width-large: 90px;
     }
 }
 
+.l-tbl-images {
+    img {
+        @extend %box-shadow;
+        width: 200px;
+    }
+
+    .img-info {
+        display: block;
+        width: 100%;
+        padding: 0px 0px 15px 15px;
+
+        b {
+            width: 115px;
+            display: inline-block;
+        }
+    }
+}
+
 .charts {
     display: flex;
 

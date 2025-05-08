@@ -44,17 +44,24 @@ namespace IoT.Web.Services
 
         public async Task<long> CreateImage(ImageRequest request)
         {
-            var imageGuid = SaveImage(request.Base64);
-
-            var objects = new List<string>();
-            var activity = await _imageRepository.GetImageActivity(request);
-
-            if(activity.Type == ActivityType.MotionDetected)
+            try
             {
-                objects = await _imageRecognitionService.Recognize(imageGuid);
-            }
+                var imageGuid = SaveImage(request.Base64);
 
-            return await _imageRepository.CreateImage(imageGuid, objects, activity);
+                var objects = new List<string>();
+                var activity = await _imageRepository.GetImageActivity(request);
+
+                if (activity.Type == ActivityType.MotionDetected)
+                {
+                    objects = await _imageRecognitionService.Recognize(imageGuid);
+                }
+
+                return await _imageRepository.CreateImage(imageGuid, objects, activity);
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
         }
 
         private Guid SaveImage(string base64)

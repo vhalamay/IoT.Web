@@ -3,6 +3,7 @@ using IoT.Web.Data.Repositories.Interfaces;
 using IoT.Web.Extensions;
 using IoT.Web.Models.Requests.Sessions;
 using IoT.Web.Models.Responses.Devices;
+using IoT.Web.Models.Responses.Images;
 using IoT.Web.Models.Responses.Sessions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -64,6 +65,28 @@ namespace IoT.Web.Data.Repositories
                     response.Items.Add(new SessionDashboardItemResponse(activities[i].Type, (int)duration.TotalSeconds));
                 }
             }
+
+            return response;
+        }
+
+        public async Task<ImagesResponse> GetSessionImages(long id, ImagesRequest request)
+        {
+            var response = new ImagesResponse();
+
+            var query = Context.ViewImages
+                .Where(w => w.SessionId == id);
+
+            response.Count = await query.CountAsync();
+
+            var items = await query
+                .OrderByDescending(o => o.CreatedOn)
+                .Skip(request.GetSkip(response.Count))
+                .Take(PagingExtensions.Take)
+                .ToListAsync();
+
+            response.Items = items
+                .Select(s => new ImageResponse(s))
+                .ToList();
 
             return response;
         }

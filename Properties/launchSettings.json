@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:53836",
+      "applicationUrl": "http://192.168.0.108:53836",
       "sslPort": 44385
     }
   },
@@ -22,7 +22,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
       },
-      "applicationUrl": "https://localhost:2024;http://localhost:2025"
+      "applicationUrl": "https://192.168.0.108:2024;http://192.168.0.108:2025"
     }
   }
 }
