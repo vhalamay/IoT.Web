@@ -105,7 +105,7 @@ namespace IoT.Web.Data.Repositories
             await Context.SaveChangesAsync();
         }
 
-        public async Task CreateActivity(ActivityRequest request)
+        public async Task<ActivityEntity> CreateActivity(ActivityRequest request)
         {
             using var transaction = await Context.Database
                 .BeginTransactionAsync(IsolationLevel.Serializable);
@@ -141,6 +141,8 @@ namespace IoT.Web.Data.Repositories
             await Context.Activities.AddAsync(activity);
             await Context.SaveChangesAsync();
             await transaction.CommitAsync();
+
+            return activity;
         }
 
         public async Task<bool> GetStatus(string secret)

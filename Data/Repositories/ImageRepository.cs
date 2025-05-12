@@ -61,5 +61,18 @@ namespace IoT.Web.Data.Repositories
 
             return activity;
         }
+
+        public async Task<Guid?> GetLastImageGuid(long activityId)
+        {
+            var image = await Context.Images
+                .Where(w => w.ActivityId == activityId)
+                .OrderByDescending(o => o.CreatedOn)
+                .FirstOrDefaultAsync();
+
+            if (image == null)
+                return null;
+
+            return image.ImageGuid;
+        }
     }
 }

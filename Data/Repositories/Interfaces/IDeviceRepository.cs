@@ -10,7 +10,7 @@ namespace IoT.Web.Data.Repositories.Interfaces
         Task<DevicesResponse> GetDevices(DevicesRequest request);
         Task<SessionEntity> StartDevice(long deviceId, string userGuid);
         Task FinishDevice(long deviceId, string userGuid);
-        Task CreateActivity(ActivityRequest request);
+        Task<ActivityEntity> CreateActivity(ActivityRequest request);
         Task<bool> GetStatus(string secret);
     }
 }

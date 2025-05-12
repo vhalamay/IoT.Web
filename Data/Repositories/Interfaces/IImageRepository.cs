@@ -10,5 +10,6 @@ namespace IoT.Web.Data.Repositories.Interfaces
     {
         Task<ActivityEntity> GetImageActivity(ImageRequest request);
         Task<long> CreateImage(Guid imageGuid, List<string> objects, ActivityEntity activity);
+        Task<Guid?> GetLastImageGuid(long activityId);
     }
 }
